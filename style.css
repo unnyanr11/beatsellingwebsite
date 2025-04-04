@@ -1,132 +1,129 @@
-/* General styles */  
+/* General Styles */  
 body {  
     font-family: Arial, sans-serif;  
-    background-color: black; /* Keeps the page consistently dark */  
+    background-color: black;  
     color: white;  
     margin: 0;  
+    padding: 0;  
 }  
 
 /* Custom Buttons */  
 .btn-custom {  
     display: inline-block;  
-    padding: 12px 24px; /* Slightly larger for a better click target */  
-    border: 2px solid white;  
-    color: white;  
-    background-color: black;  
-    border-radius: 8px;  
+    padding: 12px 20px;  
+    font-size: 1rem;  
+    font-weight: 600;  
     text-align: center;  
-    text-decoration: none;   
-    transition: all 0.3s ease; /* Smoother transition effects */  
-    font-size: 1rem; /* Ensures buttons look consistent */  
+    color: white;  
+    text-decoration: none;  
+    cursor: pointer;  
+    background-color: black;  
+    border: 2px solid white;  
+    border-radius: 8px; /* Smooth rounded corners */  
+    transition: all 0.4s ease; /* Smooth animation */  
 }  
-
 .btn-custom:hover {  
-    background-color: red;  
-    color: black;  
-    transform: scale(1.05); /* Slight grow effect */  
-    box-shadow: 0px 0px 10px red; /* Creates a glow effect */  
+    background-color: red; /* Red hover background */  
+    color: black; /* Black text on hover */  
+    transform: scale(1.1); /* Slight enlargement */  
+    box-shadow: 0 6px 12px rgba(255, 0, 0, 0.7); /* Glowing shadow */  
+}  
+.btn-custom:focus {  
+    outline: none; /* Remove default browser outline */  
+    box-shadow: 0 0 8px 4px rgba(255, 0, 0, 0.8); /* Glow effect on focus */  
 }  
 
 /* Beat Cards */  
 .beat-card {  
     background-color: black;  
     border: 2px solid white;  
-    padding: 20px;  
+    padding: 18px;  
+    border-radius: 8px; /* Match button styling */  
     text-align: center;  
-    border-radius: 10px;  
-    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;  
-    overflow: hidden;  
+    transition: all 0.3s ease;  
+    color: white;  
 }  
-
 .beat-card h3 {  
     font-size: 1.5rem;  
     font-weight: bold;  
     margin-bottom: 10px;  
 }  
-
 .beat-card p {  
-    margin-bottom: 15px;  
     font-size: 1rem;  
-    line-height: 1.5rem;  
+    line-height: 1.5;  
+    margin-bottom: 12px;  
 }  
-
 .beat-card:hover {  
-    transform: scale(1.05); /* More pronounced pop-out effect */  
-    background-color: red;  
-    color: black;  
-    box-shadow: 0px 0px 15px red; /* Glow effect */  
+    transform: scale(1.05);  
+    background-color: red; /* Red background on hover */  
+    color: black; /* Contrast with red background */  
+    box-shadow: 0 10px 20px rgba(255, 0, 0, 0.8);  
 }  
-
 .beat-card audio {  
-    outline: none;  
+    margin-top: 10px;  
+    outline: none; /* Cleaner audio player */  
 }  
 
 /* Form Inputs */  
 .form-input {  
     width: 100%;  
-    padding: 12px 16px; /* Adjusted for better usability */  
-    margin-top: 5px;  
-    border: 2px solid white;  
+    padding: 10px 12px;  
+    margin-top: 6px;  
+    font-size: 1rem;  
     background: black;  
     color: white;  
+    border: 2px solid white;  
     border-radius: 8px;  
-    transition: all 0.3s ease-in-out;  
-    font-size: 1rem;  
+    transition: all 0.3s ease;  
+    box-sizing: border-box; /* Prevent resizing issues */  
 }  
-
 .form-input:focus {  
     border-color: red;  
+    box-shadow: 0px 0px 8px red; /* Glowing focus effect */  
     outline: none;  
-    box-shadow: 0px 0px 8px red; /* Glow effect on focus */  
 }  
 
 /* Social Media Icons */  
 .social-icons a {  
     display: inline-block;  
     text-align: center;  
+    margin: 0 8px; /* Space between icons */  
     color: white;  
-    font-size: 1rem;  
-    transition: transform 0.3s ease, color 0.3s ease;  
     text-decoration: none;  
+    transition: transform 0.3s ease, color 0.3s ease;  
 }  
-
 .social-icons a img {  
     width: 50px;  
     height: 50px;  
-    display: block;  
-    margin: 0 auto;  
-    border-radius: 50%; /* Makes icons circular */  
-    transition: all 0.3s ease;  
+    border-radius: 50%; /* Round icons */  
+    transition: transform 0.3s ease;  
 }  
-
 .social-icons a:hover img {  
-    transform: scale(1.1);  
-    border: 2px solid red; /* Add a border effect on hover */  
-    box-shadow: 0px 0px 8px red;  
+    transform: scale(1.2); /* Slight enlargement on hover */  
+    border: 2px solid red; /* Red border on hover */  
+    box-shadow: 0px 4px 12px red; /* Glowing effect */  
 }  
-
 .social-icons a:hover {  
-    color: red;  
+    color: red; /* Red icon text color */  
 }  
 
-/* Filter Dropdowns */  
+/* Dropdowns (Filter Section) */  
 .select-input {  
     width: 100%;  
-    padding: 0.75rem;  
-    margin-top: 5px;  
-    border: 2px solid white;  
-    background: black;  
-    color: white;  
-    border-radius: 8px;  
+    padding: 10px 12px;  
+    margin-top: 6px;  
     font-size: 1rem;  
-    transition: all 0.3s ease;  
+    background-color: black;  
+    color: white;  
+    border: 2px solid white;  
+    border-radius: 6px;  
     cursor: pointer;  
+    transition: all 0.3s ease;  
 }  
-
 .select-input:focus {  
-    outline: none;  
     border-color: red;  
-    box-shadow: 0px 0px 8px red; /* Subtle glowing effect */  
+    box-shadow: 0px 0px 8px red;  
+    outline: none;  
 }  
 
 /* Footer */  
@@ -134,50 +131,36 @@ footer {
     background-color: black;  
     padding: 20px 0;  
     text-align: center;  
-    border-top: 2px solid red;  
     font-size: 0.875rem;  
+    border-top: 2px solid red;  
 }  
-
 footer a {  
     color: white;  
     text-decoration: none;  
     transition: color 0.3s ease;  
 }  
-
 footer a:hover {  
-    color: red;  
-}  
-
-/* Utility */  
-.text-center {  
-    text-align: center;  
-}  
-
-.text-lg {  
-    font-size: 1.125rem;  
-}  
-
-.text-xl {  
-    font-size: 1.25rem;  
-}  
-
-.font-bold {  
-    font-weight: bold;  
+    color: red; /* Red color on hover */  
 }  
 
 /* Responsive Design */  
 @media screen and (max-width: 768px) {  
     .btn-custom {  
-        padding: 10px 20px;  
-        font-size: 0.875rem; /* Adjust button size for smaller screens */  
+        padding: 10px 16px;  
+        font-size: 0.9rem; /* Smaller button text size */  
     }  
 
     .beat-card {  
-        padding: 15px;  
+        padding: 14px; /* Adjusted padding for better fit */  
     }  
 
     .form-input {  
-        padding: 10px 14px;  
+        padding: 8px;  
         font-size: 0.9rem;  
+    }  
+
+    .social-icons a img {  
+        width: 40px; /* Slightly smaller icons */  
+        height: 40px;  
     }  
 }  
