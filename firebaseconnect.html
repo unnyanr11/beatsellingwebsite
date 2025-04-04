@@ -1,0 +1,27 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Test Firebase</title>  
+</head>  
+<body>  
+    <h1>Firebase Test</h1>  
+    <script type="module">  
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";  
+
+        const firebaseConfig = {  
+            apiKey: "AIzaSyDjUaT-xsuykXlKFYnld1OETAtEJkiDh9s",  
+            authDomain: "beatsellingwebsite-2fe45.firebaseapp.com",  
+            projectId: "beatsellingwebsite-2fe45",  
+            storageBucket: "beatsellingwebsite-2fe45.firebasestorage.app",  
+            messagingSenderId: "187645140617",  
+            appId: "1:187645140617:web:d8dd367a104d580be27058",  
+            measurementId: "G-B503DQCF82"  
+        };  
+
+        const app = initializeApp(firebaseConfig);  
+        console.log("Firebase Initialized:", app);  
+    </script>  
+</body>  
+</html>  

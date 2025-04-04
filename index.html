@@ -13,29 +13,22 @@
         .btn-custom {  
             display: inline-block;  
             font-weight: bold;  
-            padding: 10px 20px; /* Sufficient padding for usability */  
+            padding: 10px 20px;  
             text-align: center;  
             color: white;  
             background-color: black;  
-            border: 2px solid white; /* White border for default state */  
-            border-radius: 8px; /* Smooth rounded corners */  
-            transition: all 0.3s ease-in-out; /* Smooth animations */  
+            border: 2px solid white;  
+            border-radius: 8px;  
+            transition: all 0.3s ease-in-out;  
         }  
 
-        /* Button Hover State */  
         .btn-custom:hover {  
             background-color: red;  
             color: black;  
-            transform: scale(1.05); /* Mild zoom in effect */  
-            box-shadow: 0px 8px 12px rgba(255, 0, 0, 0.8); /* A glow effect */  
+            transform: scale(1.05);  
+            box-shadow: 0px 8px 12px rgba(255, 0, 0, 0.8);  
         }  
 
-        /* Button Active State */  
-        .btn-custom:active {  
-            transform: scale(0.98); /* Slight compression when clicked */  
-        }  
-
-        /* Beat Card Hover Effects */  
         .beat-card:hover {  
             transform: translateY(-8px);  
             box-shadow: 0px 8px 20px rgba(255, 0, 0, 0.8);  
@@ -49,10 +42,9 @@
     <header class="sticky top-0 z-50 bg-black border-b border-red-500">  
         <nav class="container mx-auto px-5 py-4 flex justify-between items-center">  
             <h1 class="text-3xl font-bold">🔥 Beats Garage</h1>  
-            <div class="space-x-6">  
+            <div id="header-buttons" class="space-x-6">  
                 <a href="#beats" class="btn-custom">Beats</a>  
-                <a href="about.html" class="btn-custom">About</a>  
-                <a href="signup.html" class="btn-custom">Signup</a>  
+                <a href="signup.html" class="btn-custom">Sign Up</a>  
                 <a href="login.html" class="btn-custom">Login</a>  
             </div>  
         </nav>  
@@ -61,11 +53,44 @@
     <!-- Hero Section -->  
     <section class="text-center py-20 bg-red-500">  
         <h2 class="text-5xl font-bold mb-6">🔥 Level Up Your Music</h2>  
-        <p class="text-xl mb-6">Discover high-quality, professional beats for your tracks.</p>  
+        <p id="welcome-message" class="text-xl mb-6">Discover high-quality, professional beats for your tracks.</p>  
         <a href="#beats" class="btn-custom">Explore Beats</a>  
     </section>  
 
-    <!-- Filter and Beats Section -->  
+    <!-- Featured Beats Section -->  
+    <section id="featured-beats" class="py-20 container mx-auto px-5">  
+        <h2 class="text-4xl font-bold mb-10 text-center">🔥 Featured Beats</h2>  
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">  
+            <!-- Beat 1 -->  
+            <div  
+                class="beat-card bg-black border border-red-500 p-5 rounded-lg text-center transform transition-transform duration-300">  
+                <h3 class="text-2xl font-bold mb-4">Dark Vibes</h3>  
+                <p class="mb-4">Genre: Trap | BPM: 120</p>  
+                <audio id="audio-1" src="beat1.mp3"></audio>  
+                <button onclick="playAudio('audio-1', this)" class="btn-custom">Play</button>  
+            </div>  
+
+            <!-- Beat 2 -->  
+            <div  
+                class="beat-card bg-black border border-red-500 p-5 rounded-lg text-center transform transition-transform duration-300">  
+                <h3 class="text-2xl font-bold mb-4">Chill Flow</h3>  
+                <p class="mb-4">Genre: Lo-Fi | BPM: 90</p>  
+                <audio id="audio-2" src="beat2.mp3"></audio>  
+                <button onclick="playAudio('audio-2', this)" class="btn-custom">Play</button>  
+            </div>  
+
+            <!-- Beat 3 -->  
+            <div  
+                class="beat-card bg-black border border-red-500 p-5 rounded-lg text-center transform transition-transform duration-300">  
+                <h3 class="text-2xl font-bold mb-4">Drill Dreams</h3>  
+                <p class="mb-4">Genre: Drill | BPM: 140</p>  
+                <audio id="audio-3" src="beat3.mp3"></audio>  
+                <button onclick="playAudio('audio-3', this)" class="btn-custom">Play</button>  
+            </div>  
+        </div>  
+    </section>  
+
+    <!-- Beats Section -->  
     <section id="beats" class="py-20 container mx-auto px-5">  
         <h2 class="text-4xl font-bold mb-10 text-center">🎵 Browse Beats</h2>  
 
@@ -73,11 +98,10 @@
         <div class="filters mb-10 bg-black p-5 border border-red-500 rounded">  
             <h3 class="text-2xl font-bold mb-4 text-center">Filter Beats</h3>  
             <div class="grid md:grid-cols-3 gap-5">  
-                <!-- BPM Filter -->  
                 <div>  
                     <label for="bpm" class="block text-lg mb-2">BPM</label>  
-                    <select id="bpm" class="form-input p-2 border-2 border-white bg-black text-white rounded">  
-                        <option value="">All BPMs</option>  
+                    <select id="bpm-filter" class="form-input p-2 border-2 border-white bg-black text-white rounded w-full">  
+                        <option value="all">All BPMs</option>  
                         <option value="60-80">60-80</option>  
                         <option value="81-100">81-100</option>  
                         <option value="101-120">101-120</option>  
@@ -85,12 +109,10 @@
                         <option value="141+">141+</option>  
                     </select>  
                 </div>  
-
-                <!-- Genre Filter -->  
                 <div>  
                     <label for="genre" class="block text-lg mb-2">Genre</label>  
-                    <select id="genre" class="form-input p-2 border-2 border-white bg-black text-white rounded">  
-                        <option value="">All Genres</option>  
+                    <select id="genre-filter" class="form-input p-2 border-2 border-white bg-black text-white rounded w-full">  
+                        <option value="all">All Genres</option>  
                         <option value="trap">Trap</option>  
                         <option value="drill">Drill</option>  
                         <option value="ethnic">Ethnic</option>  
@@ -98,12 +120,10 @@
                         <option value="lofi">Lo-Fi</option>  
                     </select>  
                 </div>  
-
-                <!-- Mood Filter -->  
                 <div>  
                     <label for="mood" class="block text-lg mb-2">Mood</label>  
-                    <select id="mood" class="form-input p-2 border-2 border-white bg-black text-white rounded">  
-                        <option value="">All Moods</option>  
+                    <select id="mood-filter" class="form-input p-2 border-2 border-white bg-black text-white rounded w-full">  
+                        <option value="all">All Moods</option>  
                         <option value="dark">Dark</option>  
                         <option value="sad">Sad</option>  
                         <option value="happy">Happy</option>  
@@ -117,35 +137,9 @@
             </div>  
         </div>  
 
-        <!-- Beats List -->  
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="beats-list">  
-            <!-- Beat Card -->  
-            <div class="beat-card bg-black p-6 border border-red-500 rounded text-center transition-transform">  
-                <h3 class="text-2xl font-bold mb-4">Beat 1</h3>  
-                <p class="text-lg mb-4">Dark trap vibe with energetic rhythm. 120 BPM.</p>  
-                <audio controls class="w-full mb-4">  
-                    <source src="./beat1.mp3" type="audio/mp3">  
-                </audio>  
-                <button class="btn-custom w-full">Buy Now</button>  
-            </div>  
-
-            <div class="beat-card bg-black p-6 border border-red-500 rounded text-center transition-transform">  
-                <h3 class="text-2xl font-bold mb-4">Beat 2</h3>  
-                <p class="text-lg mb-4">Sad UK Drill with deep bass. 100 BPM.</p>  
-                <audio controls class="w-full mb-4">  
-                    <source src="./beat2.mp3" type="audio/mp3">  
-                </audio>  
-                <button class="btn-custom w-full">Buy Now</button>  
-            </div>  
-
-            <div class="beat-card bg-black p-6 border border-red-500 rounded text-center transition-transform">  
-                <h3 class="text-2xl font-bold mb-4">Beat 3</h3>  
-                <p class="text-lg mb-4">Energetic ethnic beat perfect for vibrant storytelling. 140 BPM.</p>  
-                <audio controls class="w-full mb-4">  
-                    <source src="./beat3.mp3" type="audio/mp3">  
-                </audio>  
-                <button class="btn-custom w-full">Buy Now</button>  
-            </div>  
+        <!-- Filtered Beats List -->  
+        <div id="filtered-beats" class="grid grid-cols-1 md:grid-cols-3 gap-8">  
+            <!-- Dynamic beat cards will be added here after applying filters -->  
         </div>  
     </section>  
 
@@ -154,10 +148,52 @@
         © 2025 Beats Garage. All Rights Reserved.  
     </footer>  
 
-    <!-- Scripts -->  
+    <!-- JavaScript -->  
     <script>  
+        // Play/Pause audio functionality  
+        function playAudio(audioId, button) {  
+            const audio = document.getElementById(audioId);  
+
+            // Pause other audio players  
+            document.querySelectorAll('audio').forEach((otherAudio) => {  
+                if (otherAudio.id !== audioId) {  
+                    otherAudio.pause();  
+                    otherAudio.currentTime = 0;  
+                }  
+            });  
+
+            // Toggle play/pause for the selected audio  
+            if (audio.paused) {  
+                audio.play();  
+                button.textContent = "Pause"; // Change button text to "Pause"  
+            } else {  
+                audio.pause();  
+                button.textContent = "Play"; // Change button text to "Play"  
+            }  
+        }  
+
+        // Apply filters and navigate to #beats section  
         document.getElementById('apply-filters').addEventListener('click', () => {  
-            alert('Filters feature coming soon!');  
+            const bpmFilter = document.getElementById('bpm-filter').value;  
+            const genreFilter = document.getElementById('genre-filter').value;  
+            const moodFilter = document.getElementById('mood-filter').value;  
+
+            const beatCards = document.querySelectorAll('#beats .beat-card');  
+            beatCards.forEach((card) => {  
+                const bpm = card.getAttribute('data-bpm');  
+                const genre = card.getAttribute('data-genre');  
+                const mood = card.getAttribute('data-mood');  
+
+                const matchesBpm = bpmFilter === 'all' || (bpmFilter === '141+' ? bpm >= 141 : bpmFilter.includes('-') && bpm >= Number(bpmFilter.split('-')[0]) && bpm <= Number(bpmFilter.split('-')[1]));  
+                const matchesGenre = genreFilter === 'all' || genre === genreFilter;  
+                const matchesMood = moodFilter === 'all' || mood === moodFilter;  
+
+                // Show/Hide based on filters  
+                card.style.display = matchesBpm && matchesGenre && matchesMood ? 'block' : 'none';  
+            });  
+
+            // Scroll to the beats section  
+            window.location.hash = 'beats';  
         });  
     </script>  
 </body>  

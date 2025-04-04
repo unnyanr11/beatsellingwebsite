@@ -8,37 +8,6 @@
 
     <!-- TailwindCSS -->  
     <script src="https://cdn.tailwindcss.com"></script>  
-    <script type="module">  
-        import { auth, googleAuthProvider } from "./firebase-config.js";  
-        import { signInWithEmailAndPassword, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";  
-
-        // Email/Password Login  
-        async function handleLogin(event) {  
-            event.preventDefault();  
-            const email = document.getElementById("email").value;  
-            const password = document.getElementById("password").value;  
-
-            try {  
-                const userCredential = await signInWithEmailAndPassword(auth, email, password);  
-                alert("Login successful! Welcome back!");  
-                window.location.href = "index.html"; // Redirect to homepage  
-            } catch (error) {  
-                alert(`Error: ${error.message}`);  
-            }  
-        }  
-
-        // Google Login Handler  
-        async function handleGoogleLogin() {  
-            try {  
-                const result = await signInWithPopup(auth, googleAuthProvider);  
-                alert(`Welcome ${result.user.displayName}!`);  
-                window.location.href = "index.html"; // Redirect to homepage  
-            } catch (error) {  
-                alert(`Error: ${error.message}`);  
-            }  
-        }  
-    </script>  
-
     <style>  
         body {  
             background-color: black;  
@@ -93,25 +62,112 @@
             border-radius: 10px;  
             box-shadow: 0 4px 12px rgba(255, 0, 0, 0.5);  
         }  
+
+        a {  
+            color: red;  
+            text-decoration: none;  
+        }  
+
+        a:hover {  
+            text-decoration: underline;  
+        }  
     </style>  
 </head>  
 
 <body>  
     <div class="form-container">  
         <h1 class="text-3xl font-bold text-center mb-6">Login</h1>  
-        <form id="login-form" onsubmit="handleLogin(event)">  
-            <input type="email" id="email" placeholder="Email" class="form-input" required />  
-            <input type="password" id="password" placeholder="Password" class="form-input" required />  
+
+        <!-- Email/Password Login Form -->  
+        <form id="login-form">  
+            <!-- Email Input -->  
+            <label for="email" class="block text-sm mb-2">Email Address</label>  
+            <input type="email" id="email" placeholder="Enter your email" class="form-input" required />  
+            <!-- Password Input -->  
+            <label for="password" class="block text-sm mb-2">Password</label>  
+            <input type="password" id="password" placeholder="Enter your password" class="form-input" required />  
+            <!-- Login Button -->  
             <button type="submit" class="btn-custom w-full mb-4">Login</button>  
         </form>  
-        <button class="btn-custom w-full mb-4" onclick="handleGoogleLogin()">  
+
+        <!-- Google Login Button -->  
+        <button id="google-login" class="btn-custom w-full mb-4">  
             Login with Google  
         </button>  
+
+        <!-- Redirect to Signup -->  
         <p class="mt-6 text-center">  
             Don't have an account?  
             <a href="signup.html" class="text-red-500 underline">Sign Up</a>  
         </p>  
     </div>  
+
+    <!-- Firebase Login Script -->  
+    <script type="module">  
+        // Import Firebase config and modules  
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";  
+        import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";  
+
+        // Firebase configuration  
+        const firebaseConfig = {  
+            apiKey: "AIzaSyBhJyFsPwo_oBdNwK_ptLtzt4zTY0c79Ss",  
+            authDomain: "beatsellingwebsite-94196.firebaseapp.com",  
+            projectId: "beatsellingwebsite-94196",  
+            storageBucket: "beatsellingwebsite-94196.firebasestorage.app",  
+            messagingSenderId: "406150768488",  
+            appId: "1:406150768488:web:e0ca848b632d16e4b898dd",  
+            measurementId: "G-TFDMRFEE0X"  
+        };  
+
+        // Initialize Firebase  
+        const app = initializeApp(firebaseConfig);  
+        const auth = getAuth(app);  
+        const googleAuthProvider = new GoogleAuthProvider();  
+
+        // Handle Email/Password Login  
+        document.getElementById("login-form").addEventListener("submit", async (event) => {  
+            event.preventDefault();  
+
+            // Collect user input  
+            const email = document.getElementById("email").value.trim();  
+            const password = document.getElementById("password").value.trim();  
+
+            try {  
+                // Firebase login with email and password  
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);  
+                alert(`Welcome back, ${userCredential.user.email}!`);  
+                window.location.href = "index.html"; // Redirect to homepage  
+            } catch (error) {  
+                // Handle login errors  
+                switch (error.code) {  
+                    case "auth/user-not-found":  
+                        alert("User not found. Please sign up first.");  
+                        break;  
+                    case "auth/wrong-password":  
+                        alert("Incorrect password. Please try again.");  
+                        break;  
+                    case "auth/invalid-email":  
+                        alert("Invalid email format. Please check your input.");  
+                        break;  
+                    default:  
+                        alert(`Error: ${error.message}`);  
+                        break;  
+                }  
+            }  
+        });  
+
+        // Handle Google Login  
+        document.getElementById("google-login").addEventListener("click", async () => {  
+            try {  
+                // Firebase login with Google  
+                const result = await signInWithPopup(auth, googleAuthProvider);  
+                alert(`Welcome, ${result.user.displayName}!`);  
+                window.location.href = "index.html"; // Redirect to homepage  
+            } catch (error) {  
+                alert(`Error: ${error.message}`);  
+            }  
+        });  
+    </script>  
 </body>  
 
 </html>  

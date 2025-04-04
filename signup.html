@@ -8,58 +8,137 @@
 
     <!-- TailwindCSS -->  
     <script src="https://cdn.tailwindcss.com"></script>  
-    <script type="module">  
-        import { auth, googleAuthProvider } from "./firebase-config.js";  
-        import { createUserWithEmailAndPassword, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";  
-
-        // Email/Password Signup  
-        async function handleSignup(event) {  
-            event.preventDefault();  
-            const email = document.getElementById("email").value;  
-            const password = document.getElementById("password").value;  
-
-            try {  
-                const userCredential = await createUserWithEmailAndPassword(auth, email, password);  
-                alert("Signup successful! Welcome to Beats Garage!");  
-                window.location.href = "login.html"; // Redirect to login page  
-            } catch (error) {  
-                alert(`Error: ${error.message}`);  
-            }  
-        }  
-
-        // Google Signup Handler  
-        async function handleGoogleSignup() {  
-            try {  
-                const result = await signInWithPopup(auth, googleAuthProvider);  
-                alert(`Welcome ${result.user.displayName}!`);  
-                window.location.href = "index.html"; // Redirect to homepage  
-            } catch (error) {  
-                alert(`Error: ${error.message}`);  
-            }  
-        }  
-    </script>  
-
     <style>  
-        /* Same styling as in login.html */  
+        body {  
+            background-color: black;  
+            color: white;  
+            font-family: Arial, sans-serif;  
+        }  
+
+        .btn-custom {  
+            display: inline-block;  
+            font-weight: bold;  
+            padding: 12px 20px;  
+            text-align: center;  
+            color: white;  
+            background-color: black;  
+            border: 2px solid white;  
+            border-radius: 8px;  
+            transition: all 0.3s ease-in-out;  
+        }  
+
+        .btn-custom:hover {  
+            background-color: red;  
+            color: black;  
+            transform: scale(1.05);  
+            box-shadow: 0px 8px 12px rgba(255, 0, 0, 0.8);  
+        }  
     </style>  
 </head>  
 
 <body>  
-    <div class="form-container">  
+    <div class="form-container max-w-md mx-auto mt-16 p-6 bg-black border border-red-500 rounded-lg shadow-lg">  
         <h1 class="text-3xl font-bold text-center mb-6">Sign Up</h1>  
-        <form id="signup-form" onsubmit="handleSignup(event)">  
-            <input type="email" id="email" placeholder="Email" class="form-input" required />  
-            <input type="password" id="password" placeholder="Password" class="form-input" required />  
-            <button type="submit" class="btn-custom w-full mb-4">Sign Up</button>  
+        <!-- Signup Form -->  
+        <form id="signup-form">  
+            <!-- Email Input -->  
+            <label for="email" class="block text-sm font-medium mb-2">Email Address</label>  
+            <input type="email" id="email" placeholder="Example: yourname@email.com" class="form-input w-full p-4 border rounded-md bg-black text-white focus:border-red-500" required />  
+
+            <!-- Password Input -->  
+            <label for="password" class="block text-sm font-medium mt-4 mb-2">Password</label>  
+            <input type="password" id="password" placeholder="Password (min 8 chars)" class="form-input w-full p-4 border rounded-md bg-black text-white focus:border-red-500" required minlength="8" />  
+
+            <!-- Confirm Password Input -->  
+            <label for="confirm-password" class="block text-sm font-medium mt-4 mb-2">Confirm Password</label>  
+            <input type="password" id="confirm-password" placeholder="Confirm Password" class="form-input w-full p-4 border rounded-md bg-black text-white focus:border-red-500" required />  
+
+            <!-- Signup Button -->  
+            <button type="submit" class="btn-custom w-full mt-6">Sign Up</button>  
         </form>  
-        <button class="btn-custom w-full mb-4" onclick="handleGoogleSignup()">  
-            Sign Up with Google  
-        </button>  
+
+        <!-- Google Signup Button -->  
+        <div class="mt-6">  
+            <button id="google-signup" class="btn-custom w-full">Sign Up with Google</button>  
+        </div>  
+
+        <!-- Redirect to Login -->  
         <p class="mt-6 text-center">  
-            Already have an account?  
-            <a href="login.html" class="text-red-500 underline">Login</a>  
+            Already have an account? <a href="login.html" class="text-red-500 hover:underline">Login</a>  
         </p>  
     </div>  
+
+    <!-- Firebase Signup Script -->  
+    <script type="module">  
+        // Import Firebase services  
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";  
+        import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";  
+
+        // Firebase configuration  
+        const firebaseConfig = {  
+            apiKey: "AIzaSyBhJyFsPwo_oBdNwK_ptLtzt4zTY0c79Ss",  
+            authDomain: "beatsellingwebsite-94196.firebaseapp.com",  
+            projectId: "beatsellingwebsite-94196",  
+            storageBucket: "beatsellingwebsite-94196.firebasestorage.app",  
+            messagingSenderId: "406150768488",  
+            appId: "1:406150768488:web:e0ca848b632d16e4b898dd",  
+            measurementId: "G-TFDMRFEE0X"  
+        };  
+
+        // Initialize Firebase  
+        const app = initializeApp(firebaseConfig);  
+        const auth = getAuth(app);  
+        const googleAuthProvider = new GoogleAuthProvider();  
+
+        // Handle Email/Password Signup  
+        document.getElementById("signup-form").addEventListener("submit", async (e) => {  
+            e.preventDefault();  
+
+            // Get input values  
+            const email = document.getElementById("email").value.trim();  
+            const password = document.getElementById("password").value.trim();  
+            const confirmPassword = document.getElementById("confirm-password").value.trim();  
+
+            // Validate passwords  
+            if (password !== confirmPassword) {  
+                alert("Passwords do not match!");  
+                return;  
+            }  
+
+            try {  
+                // Create user with email and password  
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);  
+                alert("Signup successful! Welcome to Beats Garage!");  
+                window.location.href = "login.html"; // Redirect to Login Page  
+            } catch (error) {  
+                // Handle common Firebase errors  
+                switch (error.code) {  
+                    case "auth/email-already-in-use":  
+                        alert("This email is already in use. Please log in.");  
+                        break;  
+                    case "auth/invalid-email":  
+                        alert("Invalid email format! Please try again.");  
+                        break;  
+                    case "auth/weak-password":  
+                        alert("Weak password! Please use at least 8 characters.");  
+                        break;  
+                    default:  
+                        alert(`Error: ${error.message}`);  
+                }  
+            }  
+        });  
+
+        // Handle Google Signup  
+        document.getElementById("google-signup").addEventListener("click", async () => {  
+            try {  
+                const result = await signInWithPopup(auth, googleAuthProvider);  
+                alert(`Welcome, ${result.user.displayName}!`);  
+                window.location.href = "index.html"; // Redirect to homepage or dashboard  
+            } catch (error) {  
+                alert(`Error: ${error.message}`);  
+            }  
+        });  
+    </script>  
 </body>  
 
 </html>  

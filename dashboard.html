@@ -1,0 +1,139 @@
+<!DOCTYPE html>  
+<html lang="en">  
+
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Beats Garage - Dashboard</title>  
+
+    <!-- TailwindCSS -->  
+    <script src="https://cdn.tailwindcss.com"></script>  
+    <style>  
+        /* Custom Button Styling */  
+        .btn-custom {  
+            display: inline-block;  
+            font-weight: bold;  
+            padding: 10px 20px;  
+            text-align: center;  
+            color: white;  
+            background-color: black;  
+            border: 2px solid white;  
+            border-radius: 8px;  
+            transition: all 0.3s ease-in-out;  
+        }  
+
+        .btn-custom:hover {  
+            background-color: red;  
+            color: black;  
+            transform: scale(1.05);  
+            box-shadow: 0px 8px 12px rgba(255, 0, 0, 0.8);  
+        }  
+
+        .card-container:hover {  
+            transform: translateY(-8px);  
+            box-shadow: 0px 8px 20px rgba(255, 0, 0, 0.8);  
+        }  
+    </style>  
+</head>  
+
+<body class="bg-black text-white font-sans">  
+
+    <!-- Header Section -->  
+    <header class="sticky top-0 z-50 bg-black border-b border-red-500">  
+        <nav class="container mx-auto px-5 py-4 flex justify-between items-center">  
+            <h1 class="text-3xl font-bold">🔥 Beats Garage Dashboard</h1>  
+            <div class="space-x-6">  
+                <a href="index.html" class="btn-custom">Home</a>  
+                <a href="#" id="logout-button" class="btn-custom">Logout</a>  
+            </div>  
+        </nav>  
+    </header>  
+
+    <!-- Welcome Section -->  
+    <section class="text-center py-20 bg-red-500">  
+        <h2 id="welcome-message" class="text-5xl font-bold mb-6">Welcome, User!</h2>  
+        <p class="text-xl mb-6">Manage your beats, browse content, and customize your account.</p>  
+    </section>  
+
+    <!-- Dashboard Content -->  
+    <section class="py-20 container mx-auto px-5">  
+        <h2 class="text-4xl font-bold mb-10 text-center">🎵 Your Beats Overview</h2>  
+
+        <!-- Example Cards (Dynamic Content) -->  
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">  
+            <div  
+                class="card-container bg-black border border-red-500 p-5 rounded-lg text-center transform transition-transform duration-300">  
+                <h3 class="text-2xl font-bold mb-4">Upload Beats</h3>  
+                <p class="mb-6">Easily upload your new beats and share them with others.</p>  
+                <a href="#" class="btn-custom">Upload</a>  
+            </div>  
+
+            <div  
+                class="card-container bg-black border border-red-500 p-5 rounded-lg text-center transform transition-transform duration-300">  
+                <h3 class="text-2xl font-bold mb-4">Manage Beats</h3>  
+                <p class="mb-6">View, edit, or delete your uploaded beats in one place.</p>  
+                <a href="#" class="btn-custom">Manage</a>  
+            </div>  
+
+            <div  
+                class="card-container bg-black border border-red-500 p-5 rounded-lg text-center transform transition-transform duration-300">  
+                <h3 class="text-2xl font-bold mb-4">Account Settings</h3>  
+                <p class="mb-6">Update your account details, profile picture, and preferences.</p>  
+                <a href="#" class="btn-custom">Settings</a>  
+            </div>  
+        </div>  
+    </section>  
+
+    <!-- Footer -->  
+    <footer class="bg-black py-6 text-center text-sm border-t border-red-500">  
+        © 2025 Beats Garage. All Rights Reserved.  
+    </footer>  
+
+    <!-- Firebase Scripts -->  
+    <script type="module">  
+        // Import Firebase config and modules  
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";  
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";  
+
+        // Firebase configuration  
+        const firebaseConfig = {  
+            apiKey: "AIzaSyBhJyFsPwo_oBdNwK_ptLtzt4zTY0c79Ss",  
+            authDomain: "beatsellingwebsite-94196.firebaseapp.com",  
+            projectId: "beatsellingwebsite-94196",  
+            storageBucket: "beatsellingwebsite-94196.firebasestorage.app",  
+            messagingSenderId: "406150768488",  
+            appId: "1:406150768488:web:e0ca848b632d16e4b898dd",  
+            measurementId: "G-TFDMRFEE0X"  
+        };  
+
+        // Initialize Firebase  
+        const app = initializeApp(firebaseConfig);  
+        const auth = getAuth(app);  
+
+        // Restrict Access to Authenticated Users Only  
+        onAuthStateChanged(auth, (user) => {  
+            const welcomeMessage = document.getElementById("welcome-message");  
+            if (user) {  
+                // Display logged-in user's email  
+                welcomeMessage.textContent = `Welcome, ${user.email}!`;  
+            } else {  
+                // Redirect if user is not authenticated  
+                window.location.href = "login.html";  
+            }  
+        });  
+
+        // Logout Button Functionality  
+        const logoutButton = document.getElementById("logout-button");  
+        logoutButton.addEventListener("click", async () => {  
+            try {  
+                await signOut(auth);  
+                alert("You have successfully logged out.");  
+                window.location.href = "login.html"; // Redirect to login page  
+            } catch (error) {  
+                alert(`Error logging out: ${error.message}`);  
+            }  
+        });  
+    </script>  
+</body>  
+
+</html>  

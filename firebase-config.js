@@ -1,20 +1,27 @@
-// Import Firebase modules  
+// Import Firebase services  
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";  
-import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";  
+import { getAuth } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";  
+import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";  
+import { getStorage } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js";  
 
 // Your Firebase configuration  
 const firebaseConfig = {  
-    apiKey: "YOUR_API_KEY",  
-    authDomain: "YOUR_AUTH_DOMAIN",  
-    projectId: "YOUR_PROJECT_ID",  
-    storageBucket: "YOUR_STORAGE_BUCKET",  
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",  
-    appId: "YOUR_APP_ID",  
+    apiKey: "AIzaSyBhJyFsPwo_oBdNwK_ptLtzt4zTY0c79Ss",  
+    authDomain: "beatsellingwebsite-94196.firebaseapp.com",  
+    projectId: "beatsellingwebsite-94196",  
+    storageBucket: "beatsellingwebsite-94196.firebasestorage.app", // Your correct storage bucket  
+    messagingSenderId: "406150768488",  
+    appId: "1:406150768488:web:e0ca848b632d16e4b898dd",  
+    measurementId: "G-TFDMRFEE0X" // Optional for Google Analytics  
 };  
 
 // Initialize Firebase  
 const app = initializeApp(firebaseConfig);  
-export const auth = getAuth(app);  
 
-// Google Auth Provider for Gmail login  
-export const googleAuthProvider = new GoogleAuthProvider();  
+// Firebase services initialization  
+const auth = getAuth(app);           // Initialize Firebase Authentication  
+const db = getFirestore(app);        // Initialize Firestore  
+const storage = getStorage(app);     // Initialize Firebase Storage  
+
+// Export Firebase services  
+export { auth, db, storage };  
