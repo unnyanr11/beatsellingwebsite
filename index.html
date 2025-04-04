@@ -5,16 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <title>Buy My Beats</title>  
 
-    <!-- Tailwind CSS -->  
+    <!-- TailwindCSS -->  
     <script src="https://cdn.tailwindcss.com"></script>  
-
-    <!-- External CSS -->  
     <link rel="stylesheet" href="style.css">  
-
-    <!-- Metadata for SEO -->  
-    <meta name="description" content="Discover high-quality professional beats for your music from Beats Garage. Explore, preview, and buy your next hit tracks today.">  
-    <meta name="keywords" content="Beats, Music, Tracks, Professional Beats, Buy Music">  
-    <meta name="author" content="Music Producer">  
 </head>  
 <body class="bg-black text-white font-sans">  
 
@@ -31,84 +24,105 @@
     </header>  
 
     <!-- Hero Section -->  
-    <section class="text-center py-20 bg-cover bg-center"  
-        style="background-image: url('./hero-image.jpg');">  
+    <section class="text-center py-20 bg-red-500">  
         <h2 class="text-5xl font-bold mb-4">🔥 Level Up Your Music</h2>  
         <p class="text-xl mb-6">Discover high-quality, professional beats for your tracks.</p>  
         <a href="#beats" class="btn-custom bg-black">Explore Beats</a>  
     </section>  
 
-    <!-- Beats Section -->  
+    <!-- Filter and Beats Section -->  
     <section id="beats" class="py-20 container mx-auto px-5">  
-        <h2 class="text-4xl font-bold mb-10">🎵 Featured Beats</h2>  
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">  
+        <h2 class="text-4xl font-bold mb-10 text-center">🎵 Browse Beats</h2>  
 
+        <!-- Filters -->  
+        <div class="filters mb-10 bg-black p-5 border border-red-500 rounded">  
+            <h3 class="text-2xl font-bold mb-4 text-center">Filter Beats</h3>  
+            <div class="grid md:grid-cols-3 gap-5">  
+                <!-- BPM Filter -->  
+                <div>  
+                    <label for="bpm" class="block text-lg mb-2">BPM</label>  
+                    <select id="bpm" class="form-input">  
+                        <option value="">All BPMs</option>  
+                        <option value="60-80">60-80</option>  
+                        <option value="81-100">81-100</option>  
+                        <option value="101-120">101-120</option>  
+                        <option value="121-140">121-140</option>  
+                        <option value="141+">141+</option>  
+                    </select>  
+                </div>  
+
+                <!-- Genre Filter -->  
+                <div>  
+                    <label for="genre" class="block text-lg mb-2">Genre</label>  
+                    <select id="genre" class="form-input">  
+                        <option value="">All Genres</option>  
+                        <option value="trap">Trap</option>  
+                        <option value="drill">Drill</option>  
+                        <option value="ethnic">Ethnic</option>  
+                        <option value="hip-hop">Hip-Hop</option>  
+                        <option value="lofi">Lo-Fi</option>  
+                    </select>  
+                </div>  
+
+                <!-- Mood Filter -->  
+                <div>  
+                    <label for="mood" class="block text-lg mb-2">Mood</label>  
+                    <select id="mood" class="form-input">  
+                        <option value="">All Moods</option>  
+                        <option value="dark">Dark</option>  
+                        <option value="sad">Sad</option>  
+                        <option value="happy">Happy</option>  
+                        <option value="energetic">Energetic</option>  
+                        <option value="chill">Chill</option>  
+                    </select>  
+                </div>  
+            </div>  
+
+            <div class="text-center mt-6">  
+                <button id="apply-filters" class="btn-custom bg-red-500">Apply Filters</button>  
+            </div>  
+        </div>  
+
+        <!-- Beats List -->  
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="beats-list">  
             <!-- Beat 1 -->  
-            <div class="beat-card">  
+            <div class="beat-card" data-bpm="120" data-genre="trap" data-mood="dark">  
                 <h3>Beat 1</h3>  
-                <p>A modern and rich sound for your tracks. Perfect for storytelling.</p>  
+                <p>Dark trap vibe with energetic rhythm. 120 BPM.</p>  
                 <audio controls class="w-full my-4">  
                     <source src="./beat1.mp3" type="audio/mp3">  
-                    Your browser does not support the audio element.  
+                    Your browser does not support the audio tag.  
                 </audio>  
                 <button class="btn-custom">Buy Now</button>  
             </div>  
-
             <!-- Beat 2 -->  
-            <div class="beat-card">  
+            <div class="beat-card" data-bpm="100" data-genre="drill" data-mood="sad">  
                 <h3>Beat 2</h3>  
-                <p>Energetic beats for upbeat and high-energy music vibes.</p>  
+                <p>Sad UK Drill with deep bass. 100 BPM.</p>  
                 <audio controls class="w-full my-4">  
                     <source src="./beat2.mp3" type="audio/mp3">  
-                    Your browser does not support the audio element.  
+                    Your browser does not support the audio tag.  
                 </audio>  
                 <button class="btn-custom">Buy Now</button>  
             </div>  
-
             <!-- Beat 3 -->  
-            <div class="beat-card">  
+            <div class="beat-card" data-bpm="140" data-genre="ethnic" data-mood="energetic">  
                 <h3>Beat 3</h3>  
-                <p>Cozy, melancholic melodies for emotional albums.</p>  
+                <p>Energetic ethnic beat perfect for vibrant storytelling. 140 BPM.</p>  
                 <audio controls class="w-full my-4">  
                     <source src="./beat3.mp3" type="audio/mp3">  
-                    Your browser does not support the audio element.  
+                    Your browser does not support the audio tag.  
                 </audio>  
                 <button class="btn-custom">Buy Now</button>  
             </div>  
         </div>  
     </section>  
 
-    <!-- About Section -->  
-    <section id="about" class="bg-red-500 py-20 text-center">  
-        <h2 class="text-4xl font-bold mb-6">🎤 About Me</h2>  
-        <p class="max-w-screen-md mx-auto text-xl">  
-            I'm a passionate music producer offering unique beats tailored to empower artists and storytellers. Discover the ideal beats for your next big hit.  
-        </p>  
-    </section>  
-
-    <!-- Contact Section -->  
-    <section id="contact" class="py-20 container mx-auto px-5">  
-        <h2 class="text-4xl font-bold mb-6">📫 Get in Touch</h2>  
-        <form action="#" method="POST" class="space-y-6">  
-            <div>  
-                <label for="name" class="block text-lg">Name</label>  
-                <input type="text" id="name" name="name" aria-label="Enter your name" required class="form-input" placeholder="Your Name">  
-            </div>  
-            <div>  
-                <label for="email" class="block text-lg">Email</label>  
-                <input type="email" id="email" name="email" aria-label="Enter your email" required class="form-input" placeholder="Your Email">  
-            </div>  
-            <div>  
-                <label for="message" class="block text-lg">Message</label>  
-                <textarea id="message" name="message" rows="5" required class="form-input" placeholder="Your Message"></textarea>  
-            </div>  
-            <button type="submit" class="btn-custom bg-black w-full">Send Message</button>  
-        </form>  
-    </section>  
-
     <!-- Footer -->  
     <footer class="bg-black py-6 text-center text-sm border-t border-red-500">  
         © 2025 Beats Garage. All Rights Reserved.  
     </footer>  
+
+    <script src="scripts.js"></script>  
 </body>  
 </html>  
